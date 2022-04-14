@@ -1,0 +1,9 @@
+.item{
+    grid-area: c;
+}
+
+.item img{
+   width: 100%;
+}
+ 
+
