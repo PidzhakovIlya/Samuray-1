@@ -1,29 +1,39 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import s from './Navbar.module.css';
+import Friends from './frends/Frends';
 
-const setActive =navData=>navData.isActive? s.active: s.item;
+const setActive = navData => navData.isActive ? s.active : s.item;
 
-const Navbar = () => {
+
+const Navbar = (props) => {
+
+  let friends = props.state.sitebar.map((f) => <Friends name={f.name} img={f.img} />);
   return (
-    <nav className={s.nav}>
-      <div>
-        <NavLink to="/profile" className={setActive}> Profile</NavLink>
-      </div>
-      <div className={s.item}>
-        <NavLink to="dialogs" className={setActive}> Massages</NavLink>
-      </div>
+    <div className={s.nav}>
+      <nav className={s.nav}>
+        <div>
+          <NavLink to="/profile" className={setActive}> Profile</NavLink>
+        </div>
+        <div className={s.item}>
+          <NavLink to="dialogs" className={setActive}> Massages</NavLink>
+        </div>
 
-      <div className={s.item}>
-        <NavLink to="news" className={setActive}>News</NavLink>
+        <div className={s.item}>
+          <NavLink to="news" className={setActive}>News</NavLink>
+        </div>
+        <div className={s.item}>
+          <NavLink to="music" className={setActive}> Music</NavLink>
+        </div>
+        <div className={s.item}>
+          <NavLink to="settings" className={setActive}> Settings</NavLink>
+        </div>
+      </nav>
+      <h3>Top frends</h3>
+      <div className={s.fr}>
+        {friends}
       </div>
-      <div className={s.item}>
-        <NavLink to="music" className={setActive}> Music</NavLink>
-      </div>
-      <div className={s.item}>
-        <NavLink to="settings" className={setActive}> Settings</NavLink>
-      </div>
-    </nav>
+    </div>
   )
 }
 
