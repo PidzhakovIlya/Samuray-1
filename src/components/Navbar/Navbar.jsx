@@ -8,15 +8,18 @@ const setActive = navData => navData.isActive ? s.active : s.item;
 
 const Navbar = (props) => {
 
-  let friends = props.state.sitebar.map((f) => <Friends name={f.name} img={f.img} />);
+  let friends = props.friends.map((f) => <Friends name={f.name} key = {f.id} img={f.img} />);
   return (
     <div className={s.nav}>
       <nav className={s.nav}>
         <div>
-          <NavLink to="/profile" className={setActive}> Profile</NavLink>
+          <NavLink to="/profile/24139" className={setActive}> Profile</NavLink>
         </div>
         <div className={s.item}>
           <NavLink to="dialogs" className={setActive}> Massages</NavLink>
+        </div>
+        <div className={s.item}>
+          <NavLink to="users" className={setActive}> Users</NavLink>
         </div>
 
         <div className={s.item}>
@@ -29,7 +32,7 @@ const Navbar = (props) => {
           <NavLink to="settings" className={setActive}> Settings</NavLink>
         </div>
       </nav>
-      <h3>Top frends</h3>
+      <h3>Top friends</h3>
       <div className={s.fr}>
         {friends}
       </div>

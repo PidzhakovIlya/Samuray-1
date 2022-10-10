@@ -1,12 +1,8 @@
-.ff img{
+.imgs{
     width: 50px;
     height: 50px;
     border-radius: 30px;
 }
-
-.ff{
-    display:grid;
-    
-      
+.SelectedPage{
+    font-weight: bold;
 }
-

@@ -1,7 +1,7 @@
 .dialogs{
     display: grid;
     grid-template-columns: 2fr 10fr;
-
+   
 }
 
 .dialogItem{
@@ -9,11 +9,12 @@
 }
 
 .dialog{
-
+    
 }
 
 .active{
     color: gold;
+    text-decoration: none;
 }
 
 .messages{
@@ -30,3 +31,7 @@
     height: 50px;
     border-radius: 30px;
 }
+
+.item{
+    text-decoration: none;
+ }

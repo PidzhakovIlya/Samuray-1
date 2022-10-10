@@ -1,24 +1,32 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { Navigate } from "react-router-dom";
+import AddMessageFormRedux from "./AddMasageForm/AddMasageForm";
 import DialogItem from "./DialogItem/DialgosItem";
 import s from "./Dialogs.module.css"
 import Message from "./Message/Message";
 
-const setActive = navData => navData.isActive ? s.active : s.item;
+
+// const setActive = navData => navData.isActive ? s.active : s.item;
 
 const Dialogs = (props) => {
 
+    let state = props.dialogsPage;
 
-    let dialogs = props.state.dialogs.map((d) => <DialogItem name={d.name} id={d.id} img={d.img} />);
+    let dialogs = state.dialogs.map((d) => <DialogItem name={d.name} key={d.id} id={d.id} img={d.img} />);
+    let messages = state.messages.map((m) => <Message message={m.message} key={m.id} />);
+    // let newMessageText = state.newMessageText;
 
-    let messages = props.state.messages.map((m) => <Message message={m.message} />);
 
-    let textElement = React.createRef();
-    let addText = () => {
-        let text = textElement.current.value;
-        props.addMessage(text)
+    const addNewMessage = (values) =>{
+        props.addText(values.newMassageBody);
     }
+
+    if (!props.isAuth) {
+        return <Navigate to={'/login'} />
+    };
+   
     return (
+        
         <div className={s.dialogs}>
             <div className={s.dialogItem}>
                 {dialogs}
@@ -26,12 +34,10 @@ const Dialogs = (props) => {
 
             <div className={s.messages}>
                 {messages}
-                <textarea ref={textElement}></textarea>
-                <div>
-                    <button onClick={addText}>Send</button>
-                </div>
+                <AddMessageFormRedux onSubmit={addNewMessage}/>
             </div>
         </div>
+        
     )
 }
 
