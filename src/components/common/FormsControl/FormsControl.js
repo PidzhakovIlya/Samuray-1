@@ -5,7 +5,7 @@ import styls from './FormsControl.module.css'
 const FormControl = ({ input, meta, child, ...props }) => {
     const hasError = meta.touched && meta.error
     return (
-        <div className={styls.formControl + '' + (hasError ? styls.error : '')}>
+        <div className={styls.formControl + ' ' + (hasError ? styls.error : '')}>
             <div>
                 {props.children}
             </div>
