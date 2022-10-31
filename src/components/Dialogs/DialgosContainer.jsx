@@ -6,7 +6,7 @@ import Dialogs from "./Dialgos";
 import s from "./Dialogs.module.css"
 
 
-const setActive = navData => navData.isActive ? s.active : s.item;
+// const setActive = navData => navData.isActive ? s.active : s.item;
 
 // const DialgosContainer = () => {
 
