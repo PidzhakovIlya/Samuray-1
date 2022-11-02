@@ -6,8 +6,6 @@ const SET_INTIALIZED_SUCCESS = 'SET-INTIALIZED-SUCCESS';
 
 let initialState = {
     initialized: false,
-   
-
 }
 
 const appReducer = (state = initialState, action) => {

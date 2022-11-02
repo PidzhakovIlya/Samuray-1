@@ -13,7 +13,7 @@ import News from './components/News/News';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import Settings from './components/Settings/Settings';
 import UsersContainer from './components/Users/UsersContainer.';
-import { initializeApp } from './redux/App-Reducer';
+import { initializeApp } from './redux/app-Reducer';
 
 
 class App extends React.Component {
