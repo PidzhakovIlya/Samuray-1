@@ -2,7 +2,7 @@
 
 export const required = (value) => {
     if(value) return undefined;
-    return 'Field Required (Заполните поле)';
+    return 'Field is Required (Заполните поле)';
     
 }
 

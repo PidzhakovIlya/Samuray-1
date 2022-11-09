@@ -5,22 +5,30 @@ import { Field, reduxForm } from "redux-form";
 import { login } from "../../redux/auth-Reducer";
 import { required } from "../../Utils/validators/validators";
 import { Input } from "../common/FormsControl/FormsControl";
-import style from "../common/FormsControl/FormsControl.module.css"
+// import style from "../common/FormsControl/FormsControl.module.css"
 
 const LoginForm = (props) => {
+    
+    const { handleSubmit, error } = props;
     return (
-        <form onSubmit={props.handleSubmit}>
+        <form onSubmit={handleSubmit}>
             <div>
-                <Field placeholder={"Email"} validate={[required]} name={'email'} component={Input} />
+                <label htmlFor="email">Email</label>
+                <div>
+                    <Field placeholder={"Email"} validate={[required]} name={'email'} component={Input} />
+                </div>
             </div>
             <div>
-                <Field placeholder={"Password"} validate={[required]} name={'password'} component={Input} type='password' />
+                <label htmlFor="password">Password</label>
+                <div>
+                    <Field placeholder={"Password"} validate={[required]} name={'password'} component={Input} type='password' />
+                </div>
             </div>
             <div>
-                <Field component={'input'} validate={[]} name={'rememberMe'} type={"Checkbox"} /> remember me
+                <Field component={'input'} validate={[]} name={'rememberMe'} type="Checkbox" /> remember me
             </div>
-            {/* {props.error && <div className={style.formSummeryError}>
-                {props.error}
+            {/* {error && <div className={style.formSummeryError}>
+                {error}
             </div>} */}
 
             <div>
@@ -33,6 +41,7 @@ const LoginReduxForm = reduxForm({ form: 'login' })(LoginForm)
 
 const Login = (props) => {
     const onSubmit = (formData) => {
+        console.log(formData)
         props.login(formData.email, formData.password, formData.rememberMe,)
     }
     if (props.isAuth) {
