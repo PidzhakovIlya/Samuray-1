@@ -10,7 +10,6 @@ import { useEffect } from 'react';
 
 
 const ProfileContainer = (props) => {
-
     useEffect(() => {
         let userId = props.router.params.userId;
         if (userId === undefined) {
@@ -26,7 +25,7 @@ const ProfileContainer = (props) => {
 
     return (
         <Profile {...props}
-            isOwner={!!props.router.params.userId}
+            isOwner={props.authorizedUserId == props.router.params.userId}
             profile={props.profile}
             status={props.status || '-----'}
             updateStatus={props.updateStatus} 
