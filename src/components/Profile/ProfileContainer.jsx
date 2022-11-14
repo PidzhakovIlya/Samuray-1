@@ -5,37 +5,40 @@ import { getStatus, getUserProfile, updateStatus } from '../../redux/profile-Red
 import { Navigate, useLocation, useNavigate, useParams, } from "react-router-dom";
 import { WithAuthRedirect } from '../../hoc/WithAuthRedirect';
 import { compose } from 'redux';
+import { useEffect } from 'react';
 
 
-class ProfileContainer extends React.Component {
-    refreshProfile(){
-        let userId = this.props.router.params.userId;
+
+const ProfileContainer = (props) => {    
+
+    useEffect(() => {
+        let userId = props.router.params.userId;
         if (userId === undefined) {
-            userId = this.props.authorizedUserId;
+            userId = props.authorizedUserId;
         }
         if (!userId) {
-            this.props.router.location.push('/login')
+            props.router.navigate('/login')
         }
-        this.props.getUserProfile(userId)
+        props.getUserProfile(userId)
 
-        this.props.getStatus(userId)
-        };
+        props.getStatus(userId)
+    },[props.router.params.userId])
 
-    componentDidMount() {
-       this.refreshProfile();
-    };
-    componentDidUpdate(prevProps, prevState, snapshot) {
-       this.refreshProfile()
-    };
+    // componentDidMount() {
+    //    this.refreshProfile();
+    // };
+    // componentDidUpdate(prevProps, prevState, snapshot) {
+    //    this.refreshProfile()
+    // };
 
-    render() {
-        if (!this.props.isAuth) {
-            return <Navigate to={'/login'} />
-        };
-        return (
-            <Profile {...this.props} profile={this.props.profile} status={this.props.status || '-----'} updateStatus={this.props.updateStatus} />
-        )
-    }
+    // return 
+    //     if (!this.props.isAuth) {
+    //         return <Navigate to={'/login'} />
+    //     };
+    return (
+        <Profile {...props} profile={props.profile} status={props.status || '-----'} updateStatus={props.updateStatus} />
+    )
+
 }
 
 
