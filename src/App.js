@@ -35,7 +35,7 @@ class App extends React.Component {
         <HeaderContainer />
         <NavbarContainer />
         <div class='app-wrapper-content'>
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<div> <Preloader/></div>}>
           <Routes>
             <Route path="/dialogs" element={<DialgosContainer />} />
             <Route path="/profile/:userId" element={<ProfileContainer />} />
