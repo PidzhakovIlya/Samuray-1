@@ -4,6 +4,8 @@ import s from './ProfileInfo.module.css';
 import ProfileStatusWithHooks from './ProfileStatusWithHooks';
 import usersPhoto from '../../../assets/images/users.png'
 import { useState } from 'react';
+import ProfileDataFormReduxForm from './ProfileDataForm';
+
 
 const ProfileInfo = ({ profile, status, updateStatus, isOwner, savePhoto }) => {
 
@@ -24,13 +26,13 @@ const ProfileInfo = ({ profile, status, updateStatus, isOwner, savePhoto }) => {
             {isOwner && <input type={'file'} onChange={onMainPhotoSelected} />};
         </div>
         {editMode ?
-            <ProfileDataForm profile={profile}/> :
+            <ProfileDataFormReduxForm profile={profile}/> :
             <ProfileData profile={profile} isOwner = {isOwner} goToEditMod={()=>{setEditMode(true)}}/>};
         <ProfileStatusWithHooks status={status} updateStatus={updateStatus} />
     </div>;
 }
 
-const Contact = ({ contactTitle, contactValue }) => {
+export const Contact = ({ contactTitle, contactValue }) => {
 
     return <div className={s.contact}><b>{contactTitle}</b>: {contactValue}</div>
 };
@@ -64,9 +66,5 @@ const ProfileData = ({ profile, isOwner, goToEditMod }) => {
 
 
 }
-const ProfileDataForm = ({ profile }) => {
-    return <div>
-        Form
-    </div>
-}
+
 export default ProfileInfo;
