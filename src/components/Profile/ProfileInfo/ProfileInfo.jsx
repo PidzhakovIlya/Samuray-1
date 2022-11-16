@@ -7,7 +7,7 @@ import { useState } from 'react';
 import ProfileDataFormReduxForm from './ProfileDataForm';
 
 
-const ProfileInfo = ({ profile, status, updateStatus, isOwner, savePhoto }) => {
+const ProfileInfo = ({ profile, status, updateStatus, isOwner, savePhoto, saveProfile }) => {
 
     let [editMode, setEditMode] = useState(false);
 
@@ -20,13 +20,20 @@ const ProfileInfo = ({ profile, status, updateStatus, isOwner, savePhoto }) => {
             savePhoto(e.target.files[0])
         };
     };
+
+    const onSubmit = (formData) =>{
+       saveProfile(formData).then(()=>{
+           setEditMode(false)
+       })
+    };
+
     return <div>
         <div className={s.discriptionBlock}>
             <img src={profile.photos.large || usersPhoto} className={s.mainPhoto} />
             {isOwner && <input type={'file'} onChange={onMainPhotoSelected} />};
         </div>
         {editMode ?
-            <ProfileDataFormReduxForm profile={profile}/> :
+            <ProfileDataFormReduxForm initialValues={profile} profile={profile} onSubmit = {onSubmit}/> :
             <ProfileData profile={profile} isOwner = {isOwner} goToEditMod={()=>{setEditMode(true)}}/>};
         <ProfileStatusWithHooks status={status} updateStatus={updateStatus} />
     </div>;
@@ -59,12 +66,7 @@ const ProfileData = ({ profile, isOwner, goToEditMod }) => {
                 return <Contact key={key} contactTitle={key} contactValue={profile.contacts[key]} />
             })}
         </div>
-        <div>{profile.aboutMe}</div>
-        <br />
     </div>
-
-
-
 }
 
 export default ProfileInfo;
