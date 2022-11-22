@@ -10,22 +10,25 @@ import { useEffect } from 'react';
 
 
 const ProfileContainer = (props) => {
+    let params = useParams();
+    let navigate = useNavigate();
+    let userId = params.userId;
     useEffect(() => {
-        let userId = props.router.params.userId;
-        if (userId === undefined) {
+        if (!userId ) {
+            
             userId = props.authorizedUserId;
-        }
-        if (!userId) {
-            props.router.navigate('/login')
+            if (!userId) {
+               <Navigate to='/login'/>;
+            }
         }
         props.getUserProfile(userId)
 
         props.getStatus(userId)
-    }, [props.router.params.userId])
+    }, [userId])
 
     return (
         <Profile {...props}
-            isOwner={props.authorizedUserId == props.router.params.userId}
+            isOwner={props.authorizedUserId == userId}
             profile={props.profile}
             status={props.status || '-----'}
             updateStatus={props.updateStatus} 
@@ -42,25 +45,26 @@ let mapStateToProps = (state) => ({
     isAuth: state.auth.isAuth
 });
 
-function withRouter(Component) {
-    function ComponentWithRouterProp(props) {
-        let location = useLocation();
-        let navigate = useNavigate();
-        let params = useParams();
-        return (
-            <Component
-                {...props}
-                router={{ location, navigate, params }}
-            />
-        );
-    }
+// function withRouter(Component) {
+//     function ComponentWithRouterProp(props) {
+//         let location = useLocation();
+//         let navigate = useNavigate();
+//         let params = useParams();
+//         return (
+//             <Component
+//                 {...props}
+//                 router={{ location, navigate, params }}
+//             />
+//         );
+//     }
 
-    return ComponentWithRouterProp;
-};
+//     return ComponentWithRouterProp;
+// };
 
 
 export default compose(
     connect(mapStateToProps, { getUserProfile, getStatus, updateStatus, savePhoto, saveProfile}),
-    withRouter,
+    // withRouter,
+    
     WithAuthRedirect
 )(ProfileContainer);
